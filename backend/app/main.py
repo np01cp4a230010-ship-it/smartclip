@@ -1,7 +1,10 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
+from app.oauth import router as youtube_router
 
 app = FastAPI(title="SmartClip API")
+
+app.include_router(youtube_router)
 
 @app.get("/")
 async def read_root():
@@ -11,7 +14,3 @@ async def read_root():
 async def health():
     return JSONResponse({"status": "ok"})
 
-# Placeholder endpoint for YouTube connect (OAuth)
-@app.get("/youtube/connect")
-async def youtube_connect():
-    return {"message": "TODO: implement Google OAuth flow for YouTube channel connect"}
