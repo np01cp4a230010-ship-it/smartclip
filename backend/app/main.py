@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from app.oauth import router as youtube_router
+from app.token import router as token_router
 
 app = FastAPI(title="SmartClip API")
 
 app.include_router(youtube_router)
+app.include_router(token_router)
 
 @app.get("/")
 async def read_root():
@@ -13,4 +15,3 @@ async def read_root():
 @app.get("/health")
 async def health():
     return JSONResponse({"status": "ok"})
-
